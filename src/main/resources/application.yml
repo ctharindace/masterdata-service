@@ -1,0 +1,27 @@
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka
+server:
+    port: 8180
+spring:
+    application:
+        name: masterdata-service
+    cloud:
+        config:
+            enabled: true
+    config:
+        import: configserver:http://localhost:8888
+    datasource:
+        password: 1s@secret
+        url: jdbc:postgresql://localhost:5432/application_service
+        username: master_user
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                default_schema: master_service
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        show-sql: true
