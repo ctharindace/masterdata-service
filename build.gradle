@@ -21,6 +21,20 @@ repositories {
 	mavenCentral()
 }
 
+bootBuildImage {
+	imageName = 'ctharinda/masterdata-service'
+	pullPolicy = 'IF_NOT_PRESENT'
+	publish = false
+	docker {
+		publishRegistry {
+			username = "neusername"
+			password = "password"
+			url = "https://index.docker.io/v1/"
+			email = "ctharinda4114@gmail.com"
+		}
+	}
+}
+
 ext {
 	set('springCloudVersion', "2022.0.4")
 }
@@ -32,6 +46,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'io.micrometer:micrometer-observation'
+	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+	implementation 'io.opentelemetry:opentelemetry-exporter-zipkin'
+
 	implementation 'org.springframework.kafka:spring-kafka'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

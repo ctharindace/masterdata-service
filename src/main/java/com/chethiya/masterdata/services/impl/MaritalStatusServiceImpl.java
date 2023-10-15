@@ -4,9 +4,11 @@ import com.chethiya.masterdata.dao.repository.MaritalStatusRepository;
 import com.chethiya.masterdata.dto.MaritalStatusDTO;
 import com.chethiya.masterdata.model.MaritalStatus;
 import com.chethiya.masterdata.services.MaritalStatusService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class MaritalStatusServiceImpl implements MaritalStatusService {
 
@@ -22,6 +24,7 @@ public class MaritalStatusServiceImpl implements MaritalStatusService {
     @Override
     public MaritalStatusDTO getEntity(String statusCode) {
         MaritalStatus maritalStatus = maritalStatusRepository.findByStatusCode(statusCode);
+        log.info("Getting marital status for {} {}.", statusCode, maritalStatus);
         return getDto(maritalStatus);
     }
 
