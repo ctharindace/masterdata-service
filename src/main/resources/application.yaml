@@ -2,7 +2,8 @@ eureka:
     client:
         serviceUrl:
             defaultZone: http://naming-server:8761/eureka
-
+    instance:
+        preferIpAddress: true
 server:
     port: 8180
 spring:
@@ -10,19 +11,18 @@ spring:
         name: masterdata-service
     cloud:
         config:
-            enabled: false
+            enabled: true
     config:
         import: optional:configserver:http://config-server:8888/
     datasource:
         password: 1s@secret
-        url: jdbc:postgresql://localhost:5432/application_service
-        username: master_user
+        url: jdbc:postgresql://postgres:5432/application_service
+        username: app_user
     jpa:
         hibernate:
             ddl-auto: update
         properties:
             hibernate:
-                default_schema: master_service
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
         show-sql: true
@@ -33,7 +33,7 @@ management:
             probability: 1.0
     zipkin:
         tracing:
-            endpoint: http://localhost:9411/api/v2/spans
+            endpoint: http://zipkin-service:9411/api/v2/spans
 
 logging:
     pattern:
